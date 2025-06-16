@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem auto;
+        }
+
+        .header a {
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .tournament-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .tournament-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            transition: transform 0.2s;
+        }
+
+        .tournament-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .tournament-card h3 {
+            margin-top: 0;
+        }
+
+        .tournament-card .format {
+            background-color: #e7f3ff;
+            color: #005fcc;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 1rem;
+        }
+
+        .tournament-card .details-link {
+            display: block;
+            margin-top: 1rem;
+            text-align: right;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1><i class="fa-solid fa-trophy"></i>My Tournaments</h1>
+    <div>
+
+        <a href="/tournaments/new"><i class="fa-solid fa-plus"></i> Create a Tournament</a>
+        <a href="/logout" style="background-color: #dc3545;"><i class="fa-solid fa-right-from-bracket"></i> Exit</a>
+    </div>
+</div>
+
+<div class="tournament-grid">
+    <div class="tournament-card" th:each="tournament : ${tournaments}">
+        <h3 th:text="${tournament.name}">Tournament Name</h3>
+        <p th:text="${tournament.description}">Tournament description...</p>
+        <div>
+            <span class="format" th:text="${#strings.replace(tournament.format, '_', ' ')}">Format</span>
+        </div>
+        <a th:href="'/tournaments/' + ${tournament.id}" class="details-link">View Details<i
+                class="fa-solid fa-arrow-right"></i></a>
+    </div>
+
+    <div th:if="${tournaments.isEmpty()}" style="grid-column: 1 / -1; text-align: center;">
+        <p>No tournaments have been created yet. Be the first!</p>
+    </div>
+</div>
+</body>
+</html>

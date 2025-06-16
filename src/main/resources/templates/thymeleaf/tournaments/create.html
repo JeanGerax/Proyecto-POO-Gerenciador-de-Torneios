@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tournament</title>
+    <style>
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 2rem;
+            font-size: 1.75rem;
+            text-align: center;
+            color: #1c1e21;
+        }
+
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #4b4f56;
+        }
+
+
+        input[type="text"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #dddfe2;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="text"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Create New Tournament</h1>
+    <form action="/tournaments/new" method="post">
+        <div class="form-group">
+            <label for="name">Tournament Name:</label>
+            <input type="text" id="name" name="name" placeholder="e.g., Summer Cup 2025" required>
+        </div>
+        <div class="form-group">
+            <label for="format">Format:</label>
+            <select id="format" name="format" required>
+                <option value="SINGLE">Single Elimination</option>
+                <option value="DOUBLE">Double Elimination</option>
+                <option value="LEAGUE">League (Round Robin)</option>
+                <option value="GROUPS">Groups</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Add a short description for your tournament..." required></textarea>
+        </div>
+        <button type="submit">Create Tournament</button>
+    </form>
+</div>
+</body>
+</html>

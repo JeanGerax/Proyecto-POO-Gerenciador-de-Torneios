@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Tournament</title>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background-color: #f0f2f5;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 1rem;
+            box-sizing: border-box;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Edit Tournament</h1>
+    <form th:action="'/tournaments/' + ${tournament.id} + '/edit'" method="post">
+        <div>
+            <label for="name">Tournament Name:</label>
+            <input type="text" id="name" name="name" th:value="${tournament.name}" required>
+        </div>
+        <div>
+            <label for="format">Format:</label>
+            <select id="format" name="format" required>
+                <option th:each="formatEnum : ${allFormats}"
+                        th:value="${formatEnum.name()}"
+                        th:text="${#strings.replace(formatEnum.name(), '_', ' ')}"
+                        th:selected="${formatEnum.name() == tournament.format}">
+                </option>
+            </select>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="4" th:text="${tournament.description}"
+                      required></textarea>
+        </div>
+        <button type="submit">Save Changes</button>
+    </form>
+    <a th:href="'/tournaments/' + ${tournament.id}">Cancel</a>
+</div>
+</body>
+</html>
